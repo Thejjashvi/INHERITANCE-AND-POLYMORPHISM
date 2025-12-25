@@ -1,0 +1,93 @@
+#include <iostream>
+using namespace std;
+
+class Hardware {
+protected:
+    int ram;
+    float monitorSize, speed;
+    string processor;
+
+public:
+    void getHardware() {
+        cout << "Enter RAM (GB): ";
+        cin >> ram;
+        cout << "Enter Monitor Size (inches): ";
+        cin >> monitorSize;
+        cout << "Enter Processor Name: ";
+        cin >> processor;
+        cout << "Enter Processor Speed (GHz): ";
+        cin >> speed;
+    }
+
+    void showHardware() {
+        cout << "\nRAM: " << ram << " GB"
+             << "\nMonitor: " << monitorSize
+             << "\nProcessor: " << processor
+             << "\nSpeed: " << speed << " GHz";
+    }
+};
+
+class Software {
+protected:
+    string app[3];
+    string sys[4];
+
+public:
+    void getSoftware() {
+        cout << "Enter 3 Application Software:\n";
+        for (int i = 0; i < 3; i++)
+            cin >> app[i];
+
+        cout << "Enter 4 System Software:\n";
+        for (int i = 0; i < 4; i++)
+            cin >> sys[i];
+    }
+
+    void showSoftware() {
+        cout << "\nApplication Software: ";
+        for (int i = 0; i < 3; i++)
+            cout << app[i] << " ";
+
+        cout << "\nSystem Software: ";
+        for (int i = 0; i < 4; i++)
+            cout << sys[i] << " ";
+    }
+};
+
+class Dealer : public Hardware, public Software {
+    float commission;
+
+public:
+    void getDealer() {
+        getHardware();
+        getSoftware();
+        cout << "Enter Dealer Commission: ";
+        cin >> commission;
+    }
+
+    void showDealer() {
+        showHardware();
+        showSoftware();
+        cout << "\nCommission: " << commission << "\n";
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter number of dealers: ";
+    cin >> n;
+
+    Dealer d[n];
+
+    for (int i = 0; i < n; i++) {
+        cout << "\n--- Dealer " << i + 1 << " ---\n";
+        d[i].getDealer();
+    }
+
+    cout << "\n--- Dealer Details ---\n";
+    for (int i = 0; i < n; i++) {
+        d[i].showDealer();
+    }
+
+    return 0;
+}
